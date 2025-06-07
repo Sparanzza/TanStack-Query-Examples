@@ -15,8 +15,6 @@ export const IssueView = ({ issue }: Props) => {
   const params = useParams();
   const issueNumber = Number(params.issueNumber);
 
-  console.log("Issue number:", issueNumber);
-
   const { issueQuery, commentsQuery } = useIssue(issueNumber);
 
   if (issueQuery.isLoading) {
