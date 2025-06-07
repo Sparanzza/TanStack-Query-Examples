@@ -1,14 +1,15 @@
 # GitHub Issues - TanStack Query
 
-Repositorio del proyecto del curso sobre TanStack Query con React
+Project repository for the course on TanStack Query with React
 
 ## Dev
 
-1. Clonar repositorio
-2. Instalar dependencias `npm install`
-3. Iniciar servidor de desarrollo `npm run dev`
+1. Clone repository
+2. Install dependencies `npm install`
+3. Move .env.template as .env and create github token to get labels
+3. Start development server `npm run dev`
 
-## Tecnologías usadas
+## Technologies Used
 
 - React
 - TanStack Query
