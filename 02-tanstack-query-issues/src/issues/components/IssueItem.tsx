@@ -29,9 +29,17 @@ export const IssueItem = ({ issue }: Props) => {
     });
   };
 
+  const presetData = () => {
+    console.log("Prefetching data for issue:", issue.number);
+    queryClient.setQueryData(["issues", issue.number], issue, {
+      // updatedAt: Date.now() + 1000 * 60, // 1 hour
+    });
+  };
+
   return (
     <div
-      onMouseEnter={prefetchData}
+      // onMouseEnter={prefetchData}
+      onMouseEnter={presetData}
       className="animate-fadeIn flex items-center px-2 py-3 mb-5 border rounded-md bg-slate-900 hover:bg-slate-800"
     >
       {issue.state === State.Close ? (
