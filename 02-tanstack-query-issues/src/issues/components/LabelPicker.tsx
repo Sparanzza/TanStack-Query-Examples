@@ -1,5 +1,5 @@
 import { LoadingSpinner } from "../../shared/components/loadingSpinner";
-import { useLabels } from "../issues/useLabels";
+import { useLabels } from "../hooks/useLabels";
 
 export const LabelPicker = () => {
 
