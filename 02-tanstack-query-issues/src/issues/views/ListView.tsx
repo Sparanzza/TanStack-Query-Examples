@@ -7,7 +7,19 @@ import { State } from "../../interfaces/isssue.interface";
 
 export const ListView = () => {
   const [state, setState] = useState(State.All);
-  const { issuesQuery } = useIssues({ state: state });
+  const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+  const { issuesQuery } = useIssues({ state, selectedLabels });
+
+  const onLabelSelected = (newLabels: string) => {
+    if (selectedLabels.includes(newLabels)) {
+      const updatedLabels = selectedLabels.filter(
+        (label) => label !== newLabels
+      );
+      setSelectedLabels(updatedLabels);
+    } else {
+      setSelectedLabels([...selectedLabels, newLabels]);
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 mt-5">
@@ -24,7 +36,10 @@ export const ListView = () => {
       </div>
 
       <div className="col-span-1 px-2">
-        <LabelPicker />
+        <LabelPicker
+          onLabelSelected={onLabelSelected}
+          selectedLabel={selectedLabels}
+        />
       </div>
     </div>
   );
