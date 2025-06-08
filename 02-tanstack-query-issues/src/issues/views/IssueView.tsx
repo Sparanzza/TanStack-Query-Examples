@@ -6,7 +6,7 @@ import { LoadingSpinner } from "../../shared/components/loadingSpinner";
 import { GithubIssue } from "../../interfaces/isssue.interface";
 
 interface Props {
-  issue: GithubIssue;
+  issue?: GithubIssue;
 }
 
 export const IssueView = ({ issue }: Props) => {
