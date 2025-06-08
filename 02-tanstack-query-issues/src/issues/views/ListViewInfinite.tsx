@@ -4,11 +4,12 @@ import { IssueList } from "../components/IssueList";
 import { LabelPicker } from "../components/LabelPicker";
 import { useIssues } from "../hooks/useIssues";
 import { State } from "../../interfaces/isssue.interface";
+import { useIssuesInfinite } from "../hooks/useIssuesInfinite";
 
-export const ListView = () => {
+export const ListViewInfinite = () => {
   const [state, setState] = useState(State.All);
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
-  const { issuesQuery, nextPage, previousPage, page } = useIssues({
+  const { issuesQuery } = useIssuesInfinite({
     state,
     selectedLabels,
   });
@@ -30,28 +31,23 @@ export const ListView = () => {
         {issuesQuery.isLoading ? (
           <LoadingSpinner />
         ) : (
-          <>
+          <div className="flex flex-col justify-center items-center mb-4">
             <IssueList
-              issues={issuesQuery.data!}
+              issues={issuesQuery.data?.pages.flat() ?? []}
               onStateChange={setState}
               state={state}
             />
             <div className="flex justify-between items-center">
+        
               <button
-                onClick={previousPage}
-                className="p-2 bg-blue-500 rounded-md hover:bg-blue-800 transition-all"
+                onClick={() => issuesQuery.fetchNextPage()}
+                disabled={!issuesQuery.hasNextPage || issuesQuery.isFetchingNextPage}
+                className="p-2 bg-blue-500 rounded-md hover:bg-blue-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                before
-              </button>
-              <span>{page}</span>
-              <button
-                onClick={nextPage}
-                className="p-2 bg-blue-500 rounded-md hover:bg-blue-800 transition-all"
-              >
-                next
+                {issuesQuery.isFetchingNextPage ? "Loading..." : "Load More" }
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
 
